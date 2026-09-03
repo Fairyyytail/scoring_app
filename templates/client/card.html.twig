@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>{{ client.firstName }} {{ client.lastName }}</h1>
+    <p>Скоринг: <strong>{{ client.scoring }}</strong>
+        {% if client.scoringCalculatedAt %}(рассчитан {{ client.scoringCalculatedAt|date('d.m.Y H:i') }}){% endif %}</p>
+
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.education) }}
+    {{ form_row(form.personalDataConsent) }}
+    <button type="submit">Сохранить</button>
+    {{ form_end(form) }}
+{% endblock %}

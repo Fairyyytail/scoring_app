@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Клиенты</h1>
+    <table>
+        <thead>
+        <tr><th>ФИО</th><th>Email</th><th>Телефон</th><th>Скоринг</th></tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td><a href="{{ path('client_card', {id: client.id}) }}">{{ client.fullName }}</a></td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phoneNumber  }}</td>
+                <td>{{ client.scoring }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav>
+        {% for p in 1..lastPage %}
+            <a href="{{ path('client_list', {page: p}) }}"{% if p == page %} style="font-weight:bold"{% endif %}>{{ p }}</a>
+        {% endfor %}
+    </nav>
+{% endblock %}

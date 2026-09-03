@@ -45,7 +45,7 @@ cs:
 
 fixture:
 	${DC_EXEC} bin/console cache:clear --env=dev
-	${DC_EXEC} php bin/console doctrine:fixtures:load --purge-with-truncate --no-interaction
+	${DC_EXEC} php bin/console doctrine:fixtures:load --no-interaction
 
 test:
 	${DC_EXEC} bin/console cache:clear --env=dev
