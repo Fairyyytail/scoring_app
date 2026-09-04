@@ -13,7 +13,7 @@ use App\Presentation\Request\UpdateClientRequest;
 use InvalidArgumentException;
 use Symfony\Component\Uid\Uuid;
 
-final class UpdateClientHandler
+final readonly class UpdateClientHandler
 {
     public function __construct(
         private ClientRepositoryInterface $repository,

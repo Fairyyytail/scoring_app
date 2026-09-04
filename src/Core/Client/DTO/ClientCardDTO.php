@@ -20,7 +20,8 @@ final readonly class ClientCardDTO
         public Education $education,
         public bool $personalDataConsent,
         public string $scoring,
-        public ?DateTimeImmutable $scoringCalculatedAt
+        public ?DateTimeImmutable $scoringCalculatedAt,
+        public ?DateTimeImmutable $registredAt,
     ) {
     }
 
@@ -37,6 +38,7 @@ final readonly class ClientCardDTO
             personalDataConsent: $client->hasPersonalDataConsent(),
             scoring: (string) $client->getScoring(),
             scoringCalculatedAt: $client->getScoringCalculatedAt(),
+            registredAt: $client->getRegisteredAt(),
         );
     }
 }

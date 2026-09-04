@@ -24,5 +24,8 @@ interface ClientRepositoryInterface
      */
     public function paginate(int $page, int $perPage): array;
 
+    /**
+     * @return iterable{Client[]}
+     */
     public function findAll(): iterable;
 }

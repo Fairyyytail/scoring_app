@@ -7,7 +7,7 @@ namespace App\Core\Client\Scoring\Rule;
 use App\Core\Client\Entity\Client;
 use App\Core\Client\Scoring\ScoringRuleResult;
 
-final class EducationScoringRule implements ScoringRuleInterface
+final readonly class EducationScoringRule implements ScoringRuleInterface
 {
     private const array POINTS = [
         'higher' => 15,

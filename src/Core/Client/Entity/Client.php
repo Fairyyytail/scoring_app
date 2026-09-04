@@ -28,17 +28,17 @@ class Client
         private string $lastName,
         #[ORM\Column(type: Types::STRING, length: 20, nullable: false)]
         private string $phone,
-        #[ORM\Column(length: 180)]
+        #[ORM\Column(type: Types::STRING, length: 180, nullable: false)]
         private string $email,
         #[ORM\Column(length: 20, enumType: Education::class)]
         private Education $education,
-        #[ORM\Column]
+        #[ORM\Column(type: Types::BOOLEAN, nullable: false)]
         private bool $personalDataConsent,
-        #[ORM\Column]
+        #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
         private ?DateTimeImmutable $registeredAt = null,
-        #[ORM\Column]
+        #[ORM\Column(type: Types::SMALLINT, nullable: false)]
         private int $scoring = 0,
-        #[ORM\Column(nullable: true)]
+        #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
         private ?DateTimeImmutable $scoringCalculatedAt = null,
     ) {
         $this->id = Uuid::v4();
@@ -130,10 +130,6 @@ class Client
     {
         return $this->firstName.' '.$this->lastName;
     }
-
-    /**
-     * Нормализованный номер (7XXXXXXXXXX) — для сравнений/скоринга.
-     */
     public function getPhone(): PhoneNumber
     {
         return new PhoneNumber($this->phone);
@@ -142,16 +138,6 @@ class Client
     public function getEmail(): Email
     {
         return new Email($this->email);
-    }
-
-    /**
-     * Домен email без зоны: gmail.com -> gmail.
-     */
-    public function getEmailDomainKey(): string
-    {
-        $host = substr($this->email, strpos($this->email, '@') + 1);
-
-        return mb_strtolower(explode('.', $host)[0]);
     }
 
     public function getEducation(): Education

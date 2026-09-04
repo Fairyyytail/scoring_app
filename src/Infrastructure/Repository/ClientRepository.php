@@ -8,27 +8,29 @@ use App\Core\Client\ClientRepositoryInterface;
 use App\Core\Client\Entity\Client;
 use App\Core\Client\ValueObject\Email;
 use App\Core\Client\ValueObject\PhoneNumber;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @extends DoctrineRepository<Client>
- */
-class ClientRepository extends DoctrineRepository implements ClientRepositoryInterface
+class ClientRepository implements ClientRepositoryInterface
 {
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
+    }
     public function save(Client $client): void
     {
-        $this->internalPersist($client);
+        $this->entityManager->persist($client);
     }
 
     public function flush(): void
     {
-        $this->entityManager()->flush();
+        $this->entityManager->flush();
     }
 
     public function findByPhoneAndEmail(PhoneNumber $phone, Email $email, ?string $excludeId = null): ?Client
     {
-        $qb = $this->entityManager()->createQueryBuilder();
+        $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select('c')
             ->from(Client::class, 'c')
@@ -46,12 +48,12 @@ class ClientRepository extends DoctrineRepository implements ClientRepositoryInt
 
     public function getById(Uuid $id): ?Client
     {
-        return $this->repository(Client::class)->findOneBy(['id' => $id]);
+        return $this->entityManager->getRepository(Client::class)->findOneBy(['id' => $id]);
     }
 
     public function paginate(int $page, int $perPage): array
     {
-        $qb = $this->entityManager()->createQueryBuilder();
+        $qb = $this->entityManager->createQueryBuilder();
         $qb->select('c')
             ->from(Client::class, 'c')
             ->orderBy('c.registeredAt', 'DESC')
@@ -68,7 +70,7 @@ class ClientRepository extends DoctrineRepository implements ClientRepositoryInt
 
     public function findAll(): iterable
     {
-        $qb = $this->entityManager()->createQueryBuilder();
+        $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select('c')
             ->from(Client::class, 'c');

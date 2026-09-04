@@ -7,7 +7,7 @@ namespace App\Core\Client\Scoring;
 use App\Core\Client\Enum\MobileOperator;
 use App\Core\Client\ValueObject\PhoneNumber;
 
-final class MobileOperatorResolver
+final readonly class MobileOperatorResolver
 {
     private const array CODES = [
         MobileOperator::MEGAFON->value => ['920', '925', '926', '931', '936'],

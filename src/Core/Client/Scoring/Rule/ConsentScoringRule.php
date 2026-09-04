@@ -7,7 +7,7 @@ namespace App\Core\Client\Scoring\Rule;
 use App\Core\Client\Entity\Client;
 use App\Core\Client\Scoring\ScoringRuleResult;
 
-final class ConsentScoringRule implements ScoringRuleInterface
+final readonly class ConsentScoringRule implements ScoringRuleInterface
 {
     public function calculate(Client $client): ScoringRuleResult
     {

@@ -8,7 +8,7 @@ use App\Core\Client\Entity\Client;
 use App\Core\Client\Scoring\MobileOperatorResolver;
 use App\Core\Client\Scoring\ScoringRuleResult;
 
-final class MobileOperatorScoringRule implements ScoringRuleInterface
+final readonly class MobileOperatorScoringRule implements ScoringRuleInterface
 {
     private const array POINTS = [
         'megafon' => 10,
@@ -18,7 +18,7 @@ final class MobileOperatorScoringRule implements ScoringRuleInterface
     ];
 
     public function __construct(
-        private readonly MobileOperatorResolver $resolver,
+        private MobileOperatorResolver $resolver,
     ) {
     }
 

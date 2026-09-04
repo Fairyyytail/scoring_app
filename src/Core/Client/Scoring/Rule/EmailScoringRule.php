@@ -7,7 +7,7 @@ namespace App\Core\Client\Scoring\Rule;
 use App\Core\Client\Entity\Client;
 use App\Core\Client\Scoring\ScoringRuleResult;
 
-final class EmailScoringRule implements ScoringRuleInterface
+final readonly class EmailScoringRule implements ScoringRuleInterface
 {
     private const array POINTS = [
         'gmail' => 10,
@@ -18,7 +18,7 @@ final class EmailScoringRule implements ScoringRuleInterface
 
     public function calculate(Client $client): ScoringRuleResult
     {
-        $domainKey = $client->getEmailDomainKey();
+        $domainKey = $client->getEmail()->domainKey();
 
         return new ScoringRuleResult(
             reason: sprintf('Домен e-mail: %s', array_key_exists($domainKey, self::POINTS) ? $domainKey : 'иной'),
