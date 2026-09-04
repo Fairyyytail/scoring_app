@@ -20,5 +20,18 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Core\Client\Scoring\Rule\MobileOperatorScoringRule:
+        tags: [ 'app.scoring_rule' ]
+    App\Core\Client\Scoring\Rule\EmailScoringRule:
+        tags: [ 'app.scoring_rule' ]
+    App\Core\Client\Scoring\Rule\EducationScoringRule:
+        tags: [ 'app.scoring_rule' ]
+    App\Core\Client\Scoring\Rule\ConsentScoringRule:
+        tags: [ 'app.scoring_rule' ]
+
+    App\Core\Client\Service\ScoringService:
+        arguments:
+            $rules: !tagged_iterator app.scoring_rule
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

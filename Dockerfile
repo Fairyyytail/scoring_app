@@ -14,8 +14,13 @@ WORKDIR /app
 
 COPY --chown=app . /app
 
+COPY --chown=app docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 USER app
 
 EXPOSE 8337
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["php", "-S", "0.0.0.0:8337", "-t", "public"]
