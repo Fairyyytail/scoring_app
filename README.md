@@ -22,6 +22,11 @@ http://localhost:8337/
 ```
 make test
 ```
+# Консольная команда по заданию
+```
+docker compose exec scoring_app bin/console app:scoring:calculate - для расчёта по всем
+docker compose exec scoring_app bin/console app:scoring:calculate uuid - для расчёта по одному
+```
 
 # Краткое пояснение
 ``` 
